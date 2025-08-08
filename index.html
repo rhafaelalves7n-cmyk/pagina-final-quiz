@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resultado do Quiz</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 550px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #00bfa5;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    .headline {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+      margin-top: 30px;
+    }
+
+    .subtext {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .check-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #00c853;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px auto;
+    }
+
+    .check-circle::before {
+      content: '✓';
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .highlight-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2e2e2e;
+    }
+
+    .info-text {
+      font-size: 15px;
+      color: #666;
+      margin: 10px 0 20px;
+    }
+
+    .countdown {
+      font-size: 28px;
+      font-weight: bold;
+      color: #e53935;
+    }
+
+    .redirect-msg {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .warning {
+      background-color: #fff3cd;
+      border-left: 5px solid #ffa000;
+      padding: 12px;
+      font-size: 14px;
+      color: #856404;
+      text-align: left;
+      margin-top: 30px;
+      border-radius: 4px;
+    }
+
+    .warning strong {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="step1">
+  <div class="loader"></div>
+  <div class="headline">Analisando suas respostas...</div>
+  <div class="subtext">Estamos procurando uma vaga disponível para você na próxima apresentação.</div>
+</div>
+
+<div class="container hidden" id="step2">
+  <div class="check-circle"></div>
+  <div class="highlight-title">Sua vaga foi encontrada!</div>
+  <div class="info-text">Identificamos uma vaga recém-disponível devido a uma desistência de última hora.</div>
+  <div class="countdown" id="timer">6</div>
+  <div class="redirect-msg">Você será redirecionado automaticamente em 6 segundos...</div>
+  <div class="warning">
+⚠️ <strong>Atenção:</strong> Não feche esta janela. Essa oportunidade é <strong>irrecuperável</strong> — mulheres que a perderam relataram esperar até <strong>8 meses</strong> por algo semelhante... <em>quando encontraram.</em><br><br>
+<strong>Última chamada:</strong> Caso você saia agora, sua vaga será liberada e transferida automaticamente para a próxima pessoa da lista de espera em menos de <strong>2 minutos</strong>.
+</div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
+    startCountdown();
+  }, 5000);
+
+  function startCountdown() {
+    let seconds = 6;
+    const timer = document.getElementById("timer");
+    const redirectUrl = "https://sua-pagina-de-vendas.com";
+
+    const countdown = setInterval(() => {
+      seconds--;
+      timer.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        window.location.href = redirectUrl;
+      }
+    }, 1000);
+  }
+</script>
+
+</body>
+</html>
